@@ -4,49 +4,6 @@ Rewrite img tags to use a simple data-src technique for lazy loading of images.
 See this [blog post](https://davidwalsh.name/lazyload-image-fade) by David Walsh for more information 
 about how the rewritten HTML works with css and javascript to lazy load images.
 
-## Single Tags
-
-### css
-
-Outputs starter CSS for displaying lazy load.
-
-```
-img {
-  opacity: 1;
-  transition: opacity .3s;
-  }
-  
-img[data-src] {
-    opacity: 0;
-  }
-  
-```
----
-
-### js
-
-Outputs tarter script for loading image process with the ```{exp:gdtlazyload:replace}``` tag pair.
-
-```
-function insertImg (noscript) {   
-    var img = new Image();
-    img.setAttribute('data-src', '');
-    noscript.parentNode.insertBefore(img, noscript);
-    img.onload = function() {
-    img.removeAttribute('data-src');
-  }
-  img.src = noscript.getAttribute('data-src');
-}
-
-[].forEach.call(document.querySelectorAll('noscript'), function(noscript) {
-insertImg(noscript);
- 
-});
-          
-```
----
-
-
 ## Tag Pairs
 
 ### Replace
@@ -90,6 +47,51 @@ a fallback for browsers with javascript disabled, set this to 'n';
 ```
 
 ---
+
+## Single Tags
+
+### css
+
+Outputs some starter CSS for displaying lazy load. 
+
+```
+img {
+  opacity: 1;
+  transition: opacity .3s;
+  }
+  
+img[data-src] {
+    opacity: 0;
+  }
+  
+```
+---
+
+### js
+
+Outputs some starter script code for loading image process with the ```{exp:gdtlazyload:replace}``` tag pair.
+
+```
+function insertImg (noscript) {   
+    var img = new Image();
+    img.setAttribute('data-src', '');
+    noscript.parentNode.insertBefore(img, noscript);
+    img.onload = function() {
+    img.removeAttribute('data-src');
+  }
+  img.src = noscript.getAttribute('data-src');
+}
+
+[].forEach.call(document.querySelectorAll('noscript'), function(noscript) {
+insertImg(noscript);
+ 
+});
+          
+```
+---
+
+
+
 
 ## Change Log
  - 1.0.0 Initial release
